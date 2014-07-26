@@ -3,7 +3,8 @@ using System.Collections;
 using GamepadInput;
 
 public class PlayerMovement : MonoBehaviour {
-	
+
+	public float acceleration;
 	public float playerThrust;
 	public float rotationSpeed;
 	public float maxThrust;
@@ -21,6 +22,8 @@ public class PlayerMovement : MonoBehaviour {
 		port = false;
 		starboard = false;
 
+		playerThrust = 5;
+		acceleration = (playerThrust * 50) * Time.deltaTime;
 		rotationSpeed = 50;
 		naturalDrift = 1;
 		maxThrust = 50;
@@ -28,20 +31,16 @@ public class PlayerMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.W)) {
+
+		if (Input.GetAxis ("DPadVert") > 0)
 			ForwardThrust ();
-		}
-		if (Input.GetKeyDown(KeyCode.S)) {
+		else if (Input.GetAxis ("DPadVert") < 0)
 			ReverseThrust ();
-		}
-		if (Input.GetKeyDown(KeyCode.A)) {
+
+		if (Input.GetAxis ("DPadHort") > 0)
 			PortThrust ();
-		}
-		if (Input.GetKeyDown(KeyCode.D)) {
-			StarboardThrust ();
-		}
-		/*transform.Rotate (GamePad.Axis.RightStick, 
-		                 GamePad.Axis.RightStick, 0);*/
+		else if (Input.GetAxis("DPadHort") < 0)		
+		    StarboardThrust ();
 	}
 
 	void ForwardThrust(){
@@ -60,15 +59,16 @@ public class PlayerMovement : MonoBehaviour {
 
 	void PortThrust(){
 		if (playerThrust < maxThrust)
-			rigidbody.AddRelativeForce (Vector3.left * 50);
+			rigidbody.AddRelativeForce (Vector3.left * acceleration);
 		else
 			rigidbody.AddForce (Vector3.left);
 	}
 
 	void StarboardThrust(){
 		if (playerThrust < maxThrust)
-			rigidbody.AddRelativeForce (Vector3.right * 50);
+			rigidbody.AddRelativeForce (Vector3.right * acceleration);
 		else
 			rigidbody.AddForce (Vector3.right);
 	}
+
 }
