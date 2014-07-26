@@ -42,34 +42,34 @@ public class PlayerMovement : MonoBehaviour {
 		if (Input.GetMouseButton (0)) {
 			transform.Rotate ((Input.GetAxis ("Mouse X") * rotationSpeed * Time.deltaTime), 
 		                 	(Input.GetAxis ("Mouse Y") * rotationSpeed * Time.deltaTime), 
-		                 	0, Space.Self);
+		                 	0);
 		}
 	}
 
 	void ForwardThrust(){
 		if (playerThrust < maxThrust)
-			rigidbody.AddForce (Vector3.forward * 50);
+			rigidbody.AddRelativeForce (Vector3.forward * 50);
 		else
 			rigidbody.AddForce (Vector3.forward);
 	}
 
 	void ReverseThrust(){
 		if (playerThrust < maxThrust)
-			rigidbody.AddForce (Vector3.back * 50);
+			rigidbody.AddRelativeForce (Vector3.back * 50);
 		else
 			rigidbody.AddForce (Vector3.back);
 	}
 
 	void PortThrust(){
 		if (playerThrust < maxThrust)
-			rigidbody.AddForce (Vector3.left * 50);
+			rigidbody.AddRelativeForce (Vector3.left * 50);
 		else
 			rigidbody.AddForce (Vector3.left);
 	}
 
 	void StarboardThrust(){
 		if (playerThrust < maxThrust)
-			rigidbody.AddForce (Vector3.right * 50);
+			rigidbody.AddRelativeForce (Vector3.right * 50);
 		else
 			rigidbody.AddForce (Vector3.right);
 	}
