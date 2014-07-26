@@ -42,14 +42,14 @@ public class DialNeedleScript : MonoBehaviour {
 		
 		if(isFull && isMoving)
 		{
-			usageRate = Random.Range(1,3);
+			usageRate = Random.Range(0,1);
 			if(this.transform.localEulerAngles.y > dialStartloc)
 			{
 				this.transform.Rotate(Vector3.up * usageRate * Time.deltaTime);
 			}
 			else
 			{
-				print ("Crash your dead");
+				// end game here // 
 			}
 		}
 		
