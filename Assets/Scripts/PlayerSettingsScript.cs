@@ -23,7 +23,7 @@ public class PlayerSettingsScript: MonoBehaviour
 		m_goMainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 		m_goOculusCamera = GameObject.FindGameObjectWithTag("OculusCamera");
 
-		if( m_bOculusOn)
+		if(m_bOculusOn)
 		{
 
 			m_goOculusCamera.SetActive(true);
