@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using GamepadInput;
 
 public class PlayerMovement : MonoBehaviour {
 	
@@ -39,11 +40,8 @@ public class PlayerMovement : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.D)) {
 			StarboardThrust ();
 		}
-		if (Input.GetMouseButton (0)) {
-			transform.Rotate ((Input.GetAxis ("Mouse X") * rotationSpeed * Time.deltaTime), 
-		                 	(Input.GetAxis ("Mouse Y") * rotationSpeed * Time.deltaTime), 
-		                 	0);
-		}
+		/*transform.Rotate (GamePad.Axis.RightStick, 
+		                 GamePad.Axis.RightStick, 0);*/
 	}
 
 	void ForwardThrust(){
