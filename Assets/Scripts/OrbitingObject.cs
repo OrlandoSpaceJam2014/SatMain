@@ -4,9 +4,15 @@ using System.Collections;
 public class OrbitingObject : MonoBehaviour
  {
  	private GameObject		m_goTargetObject;
+ 	
+ 	private Vector3			m_v3NewMove;
+ 	
  	private float 			m_fRotSpeed = 6.0f;
- 	private float 			m_fMoveSpeed = 3.0f;
-
+ 	private float 			m_fMoveSpeed = 0.01f;
+ 	private float 			m_fRadius = 100f;
+	private float 			m_fCurrentDistance = 0f;
+	
+	private bool			m_bSwitchDirection = false;
 
 	void Awake()
 	{
@@ -22,7 +28,32 @@ public class OrbitingObject : MonoBehaviour
 	void Update () 
 	{
 		RotateObject();
+		MoveObject();
+		CheckDistance();
+		
+		
+		
+		
+		
+		
+		if(m_bSwitchDirection)
+		{
+			if(m_fMoveSpeed < 0)
+				m_fMoveSpeed = .01f;
+			else
+				m_fMoveSpeed = -.01f;
+				m_bSwitchDirection = false;
+		}
 	}
+ 	
+ 	void CheckDistance()
+ 	{
+ 		m_fCurrentDistance = Vector3.Distance(this.transform.position, m_goTargetObject.transform.position);
+ 		if(m_fCurrentDistance > 1000)
+ 		{
+ 			m_bSwitchDirection= true;
+ 		}
+ 	}
  	
  	void RotateObject()
  	{
@@ -34,6 +65,11 @@ public class OrbitingObject : MonoBehaviour
  	
  	void MoveObject()
  	{
- 		
- 	}
+ 		m_v3NewMove.x = this.transform.position.x * m_fMoveSpeed * Time.deltaTime;
+		m_v3NewMove.y = this.transform.position.y * m_fMoveSpeed * Time.deltaTime;
+		m_v3NewMove.z = this.transform.position.z * m_fMoveSpeed * Time.deltaTime;
+		
+		this.transform.position += m_v3NewMove;
+		
+	}
 }
