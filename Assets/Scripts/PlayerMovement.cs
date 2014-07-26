@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using GamepadInput;
 
 public class PlayerMovement : MonoBehaviour {
 
