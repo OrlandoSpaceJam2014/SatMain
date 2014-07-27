@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour {
 		playerThrust = 5.0f;
 		playerSpeed = 0.0f;
 		playerSideSpeed = 0.0f;
-		maxSpeed = 5.0f;
+		maxSpeed = 50.0f;
 		acceleration = (playerThrust * 50) * Time.deltaTime;
 		rotationSpeed = 5.0f;
 	}

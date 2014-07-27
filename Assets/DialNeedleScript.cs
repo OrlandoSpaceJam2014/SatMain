@@ -9,38 +9,37 @@ public class DialNeedleScript : MonoBehaviour {
 	public float changeRate;
 	public float usageRate;
 	public bool  isMoving = false;
-	private bool isFull = false;
+	private bool isEmpty = false;
 	
 	// Use this for initialization
 	void Start () {
 		dialCurloc = gameObject.transform.rotation.y;
-		dialStartloc = 290f;
-		dialEndloc = 85.0f;
+		dialStartloc = 89.0f;
+		dialEndloc = -89.0f;
 		changeRate = 50;
 		usageRate = 0f;
 		
 		//Start the dial's current location at the dial's starting position.
-		dialCurloc = dialEndloc;
+		dialCurloc = dialStartloc;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
 			
-		if(!isFull)
+		if(!isEmpty)
 		{	
-			if (this.transform.localEulerAngles.y > dialEndloc) 
+			if (this.transform.localEulerAngles.y >= dialEndloc) 
 			{
 				transform.Rotate (Vector3.up * changeRate * Time.deltaTime);
-				dialStartloc = gameObject.transform.rotation.y;
 			}
 			else
 			{
-				isFull = true;
+				isEmpty = true;
 			}
 		}
 		
-		if(isFull && isMoving)
+		if(!isEmpty && isMoving)
 		{
 			usageRate = Random.Range(0,1);
 			if(this.transform.localEulerAngles.y > dialStartloc)
