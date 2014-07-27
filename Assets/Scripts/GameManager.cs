@@ -35,14 +35,18 @@ public class GameManager : MonoBehaviour {
 			}
 			else if( i == 3)
 			{
-				//end the game	you won.
+				PlayerSettingsScript.Instance.m_bGameOver = true;
+				PlayerSettingsScript.Instance.m_bUwin = true;
+				Application.LoadLevel(2);
 			}
 		}
 
 
 		if(m_bIsDead)
 		{
-			// end the game u died;
+			PlayerSettingsScript.Instance.m_bGameOver = true;
+			PlayerSettingsScript.Instance.m_bUwin = false;
+			Application.LoadLevel(2);
 		}
 	}
 }
