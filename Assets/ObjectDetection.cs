@@ -8,15 +8,16 @@ public class ObjectDetection : MonoBehaviour {
 
 	public Ray detectRay;
 	public RaycastHit hitInfo;
+	public GameObject objectScript;
 
 	public float rayLength = 500.0f;
-
+	private GrabObjectScript gbScript;
 
 	// Use this for initialization
 	void Start () {
 		detection = false;
 		carryObject = false;
-
+		gbScript = GameObject.Find("Sat").GetComponent<GrabObjectScript> ();
 		detectRay = new Ray (transform.position, transform.forward);
 	}
 	
@@ -27,6 +28,7 @@ public class ObjectDetection : MonoBehaviour {
 
 		if (Physics.Raycast (detectRay.origin, detectRay.direction, out hitInfo, rayLength, 0)) {
 			if(hitInfo.collider.tag == "Grabable" && Input.GetButtonDown("button 0")){
+				gbScript.isGrabbed = true;
 				GrabObject();
 			}
 			detection = true;
