@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour {
 	public bool starboard;
 	public bool isActive;
 
+	public AudioClip impact;
+
 	// Use this for initialization
 	void Start () {
 		forward = false;
@@ -100,12 +102,13 @@ public class PlayerMovement : MonoBehaviour {
 		else
 			isActive = true;
 	}
-	
-	void OnTriggerEnter(Collider other)
-	{
-		if(other.name == "Skybox")
-		{
+
+	void OnCollisionEnter(Collision other){
+		if (other.gameObject.name == "Skybox") {
 			GameManager.Instance.m_bIsDead = true;
+		} 
+		else if (other.gameObject.name == "Satellite") {
+
 		}
 	}
 
