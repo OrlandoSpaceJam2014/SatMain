@@ -48,6 +48,10 @@ public class FuelNeedleScript : MonoBehaviour {
 		{	
 			transform.Rotate (Vector3.up * -changeRate * Time.deltaTime);
 		}
+		else
+		{
+			GameManager.Instance.m_bIsDead = true;
+		}
 		
 		/*if(!isEmpty && isMoving)
 		{

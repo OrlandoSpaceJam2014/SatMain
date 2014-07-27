@@ -102,6 +102,7 @@ public class PlayerMovement : MonoBehaviour {
 		else
 			isActive = true;
 	}
+<<<<<<< HEAD
 
 	void OnCollisionEnter(Collision other){
 		if (other.gameObject.name == "Skybox") {
@@ -109,6 +110,14 @@ public class PlayerMovement : MonoBehaviour {
 		} 
 		else if (other.gameObject.name == "Satellite") {
 
+=======
+	
+	void OnTriggerEnter(Collider other)
+	{
+		if(other.name == "Skybox")
+		{
+			//GameManager.Instance.m_bIsDead = true;
+>>>>>>> origin/master
 		}
 	}
 
