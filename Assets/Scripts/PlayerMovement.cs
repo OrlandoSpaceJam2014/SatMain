@@ -105,7 +105,7 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		if(other.name == "Skybox")
 		{
-			GameManager.Instance.m_bIsDead = true;
+			//GameManager.Instance.m_bIsDead = true;
 		}
 	}
 
