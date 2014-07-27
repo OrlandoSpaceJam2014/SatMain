@@ -11,13 +11,17 @@ public class ObjectDetection : MonoBehaviour {
 	public GameObject objectScript;
 
 	public float rayLength = 500.0f;
-	private GrabObjectScript gbScript;
+	private GrabObjectScript gbScript1;
+	private GrabObjectScript gbScript2;
+	private GrabObjectScript gbScript3;
 
 	// Use this for initialization
 	void Start () {
 		detection = false;
 		carryObject = false;
-		gbScript = GameObject.Find("Sat").GetComponent<GrabObjectScript> ();
+		gbScript1 = GameObject.Find("Dish").GetComponent<GrabObjectScript> ();
+		gbScript2 = GameObject.Find("Panel").GetComponent<GrabObjectScript> ();
+		gbScript3 = GameObject.Find("Power").GetComponent<GrabObjectScript> ();
 		detectRay = new Ray (transform.position, transform.forward);
 	}
 	
@@ -28,7 +32,14 @@ public class ObjectDetection : MonoBehaviour {
 
 		if (Physics.Raycast (detectRay.origin, detectRay.direction, out hitInfo, rayLength, 0)) {
 			if(hitInfo.collider.tag == "Grabable" && Input.GetButtonDown("button 0")){
-				gbScript.isGrabbed = true;
+				if(hitInfo.transform.gameObject.name == "Dish")
+					gbScript1.isGrabbed = true;
+				else if(hitInfo.transform.gameObject.name == "Panel")
+					gbScript1.isGrabbed = true;
+				else if(hitInfo.transform.gameObject.name == "Power")
+					gbScript3.isGrabbed = true;
+
+
 				GrabObject();
 			}
 			detection = true;
