@@ -4,9 +4,14 @@ using System.Collections;
 public class ObjectDetection : MonoBehaviour {
 
 
-	private GameObject dish;
-	private GameObject panel;
-	private GameObject power;
+	public GameObject dish;
+	public GameObject panel;
+	public GameObject power;
+
+	public GrabObjectScript dishScript;
+	public GrabObjectScript panelScript;
+	public GrabObjectScript powerScript;
+
 
 	// Use this for initialization
 	void Start () {
@@ -14,7 +19,9 @@ public class ObjectDetection : MonoBehaviour {
 		panel = GameObject.Find ("Panel");
 		power = GameObject.Find ("Power");
 
-
+		dishScript = dish.GetComponent<GrabObjectScript> ();
+		panelScript = panel.GetComponent<GrabObjectScript> ();
+		powerScript = power.GetComponent<GrabObjectScript> ();
 	}
 	
 	// Update is called once per frame
@@ -23,11 +30,17 @@ public class ObjectDetection : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		if (other.name == "Dish")
+		if (other.name == "Dish") {
 			Debug.Log ("Ran into the Dish");
-		else if (other.name == "Panel")
+			dishScript.isGrabbed = true;
+		} 
+		else if (other.name == "Panel") {
 			Debug.Log ("Ran into the Panel");
-		else if (other.name == "Power")
+			panelScript.isGrabbed = true;
+		}
+		else if (other.name == "Power") {
 			Debug.Log ("Ran into the Power");
+			powerScript.isGrabbed = true;
+		}
 	}
 }

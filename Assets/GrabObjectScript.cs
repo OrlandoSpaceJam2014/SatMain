@@ -4,12 +4,14 @@ using System.Collections;
 public class GrabObjectScript : MonoBehaviour {
 
 	public static GrabObjectScript Instance;
-
-	public GameObject player;
+	
+	public GameObject playerGrabber;
 	public bool isGrabbed;
 
 	void Awake(){
 		Instance = this;
+
+		playerGrabber = GameObject.Find ("GrappleDetector");
 	}
 
 	void Start(){
@@ -20,7 +22,7 @@ public class GrabObjectScript : MonoBehaviour {
 	void Update () {
 
 		if(isGrabbed){
-			this.transform.Translate(player.transform.position.x, player.transform.position.y, player.transform.position.z + 10);
+			this.transform.position = playerGrabber.transform.position;
 		}
 	}
 }
