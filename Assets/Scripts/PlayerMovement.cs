@@ -5,9 +5,10 @@ public class PlayerMovement : MonoBehaviour {
 
 	public float acceleration;
 	public float playerThrust;
+	public float playerSpeed;
+	public float playerSideSpeed;
+	public float maxSpeed;
 	public float rotationSpeed;
-	public float maxThrust;
-	public float naturalDrift;
 
 	public bool forward;
 	public bool reverse;
@@ -21,24 +22,25 @@ public class PlayerMovement : MonoBehaviour {
 		port = false;
 		starboard = false;
 
-		playerThrust = 5;
+		playerThrust = 5.0f;
+		playerSpeed = 0.0f;
+		playerSideSpeed = 0.0f;
+		maxSpeed = 5.0f;
 		acceleration = (playerThrust * 50) * Time.deltaTime;
-		rotationSpeed = 5;
-		naturalDrift = 1;
-		maxThrust = 50;
+		rotationSpeed = 5.0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetAxis("DPadVert") > 0.9)
+		if (Input.GetAxis("DPadVert") > 0.9 && playerSpeed < maxSpeed)
 			ForwardThrust ();
-		else if (Input.GetAxis ("DPadVert") < -0.9)
+		else if (Input.GetAxis ("DPadVert") < -0.9 && playerSpeed > -maxSpeed)
 			ReverseThrust ();
 
-		if (Input.GetAxis ("DPadHort") < 0)
+		if (Input.GetAxis ("DPadHort") < 0 && playerSideSpeed > maxSpeed)
 			PortThrust ();
-		else if (Input.GetAxis("DPadHort") > 0)		
+		else if (Input.GetAxis("DPadHort") > 0 && playerSideSpeed < -maxSpeed)		
 		    StarboardThrust ();
 
 		if (Input.GetAxis ("RStickHort") > 0)
@@ -63,28 +65,23 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void ForwardThrust(){
-			rigidbody.AddRelativeForce (Vector3.forward * acceleration);
+		rigidbody.AddRelativeForce (Vector3.forward * acceleration);
+		playerSpeed += 1.0f * Time.deltaTime;
 	}
 
 	void ReverseThrust(){
-		if (playerThrust < maxThrust)
-			rigidbody.AddRelativeForce (Vector3.back * acceleration);
-		else
-			rigidbody.AddForce (Vector3.back);
+		rigidbody.AddRelativeForce (Vector3.back * acceleration);
+		playerSpeed -= 1.0f * Time.deltaTime;
 	}
 
 	void PortThrust(){
-		if (playerThrust < maxThrust)
-			rigidbody.AddRelativeForce (Vector3.left * acceleration);
-		else
-			rigidbody.AddForce (Vector3.left);
+		rigidbody.AddRelativeForce (Vector3.left * acceleration);
+		playerSideSpeed += 1.0f * Time.deltaTime;
 	}
 
 	void StarboardThrust(){
-		if (playerThrust < maxThrust)
-			rigidbody.AddRelativeForce (Vector3.right * acceleration);
-		else
-			rigidbody.AddForce (Vector3.right);
+		rigidbody.AddRelativeForce (Vector3.right * acceleration);
+		playerSideSpeed -= 1.0f * Time.deltaTime;
 	}
 
 }
