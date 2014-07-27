@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour {
 	public bool reverse;
 	public bool port;
 	public bool starboard;
+	public bool isActive;
 
 	// Use this for initialization
 	void Start () {
@@ -67,21 +68,37 @@ public class PlayerMovement : MonoBehaviour {
 	void ForwardThrust(){
 		rigidbody.AddRelativeForce (Vector3.forward * acceleration);
 		playerSpeed += 1.0f * Time.deltaTime;
+		if (Input.GetAxis ("DPadVert") > 0.0 && Input.GetAxis ("DPadVert") < 0.1)
+			isActive = false;
+		else
+			isActive = true;
 	}
 
 	void ReverseThrust(){
 		rigidbody.AddRelativeForce (Vector3.back * acceleration);
 		playerSpeed -= 1.0f * Time.deltaTime;
+		if (Input.GetAxis ("DPadVert") < 0.0 && Input.GetAxis ("DPadVert") > -0.1)
+			isActive = false;
+		else
+			isActive = true;
 	}
 
 	void PortThrust(){
 		rigidbody.AddRelativeForce (Vector3.left * acceleration);
 		playerSideSpeed += 1.0f * Time.deltaTime;
+		if (Input.GetAxis ("DPadHort") < 0.0 && Input.GetAxis ("DPadHort") > -0.1)
+			isActive = false;
+		else
+			isActive = true;
 	}
 
 	void StarboardThrust(){
 		rigidbody.AddRelativeForce (Vector3.right * acceleration);
 		playerSideSpeed -= 1.0f * Time.deltaTime;
+		if (Input.GetAxis ("DPadHort") > 0.0 && Input.GetAxis ("DPadHort") < 0.1)
+			isActive = false;
+		else
+			isActive = true;
 	}
 	
 	void OnTriggerEnter(Collider other)
