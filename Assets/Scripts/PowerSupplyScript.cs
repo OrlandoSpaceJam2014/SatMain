@@ -31,7 +31,7 @@ public class PowerSupplyScript : MonoBehaviour
 	void OnTriggerEnter(Collider other)
 	{
 		
-		if(other.name == "PowerCell")
+		if(other.name == "Power")
 		{
 			m_bIsAttached = true;
 			DestroyObject(other.gameObject);

@@ -16,7 +16,7 @@ public class OrbitingObject : MonoBehaviour
 
 	void Awake()
 	{
-		m_goTargetObject = GameObject.FindGameObjectWithTag("Player");
+		m_goTargetObject = GameObject.FindGameObjectWithTag("Sat");
 	}
 	// Use this for initialization
 	void Start () 

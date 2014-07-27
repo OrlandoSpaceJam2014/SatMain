@@ -30,7 +30,7 @@ public class PanelScript : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		
-		if(other.name == "SolarPanel")
+		if(other.name == "Panel")
 		{
 			m_bIsAttached = true;
 			DestroyObject(other.gameObject);

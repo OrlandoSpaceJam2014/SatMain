@@ -30,7 +30,7 @@ public class DishScript : MonoBehaviour
 	void OnTriggerEnter(Collider other)
 	{
 
-		if(other.name == "DishMain")
+		if(other.name == "Dish")
 		{
 			m_bIsAttached = true;
 			DestroyObject(other.gameObject);
