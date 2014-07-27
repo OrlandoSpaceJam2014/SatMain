@@ -31,7 +31,7 @@ public class DialNeedleScript : MonoBehaviour {
 		{	
 			if (this.transform.localEulerAngles.y >= dialEndloc) 
 			{
-				transform.Rotate (Vector3.up * changeRate * Time.deltaTime);
+				transform.Rotate (Vector3.up * -changeRate * Time.deltaTime);
 			}
 			else
 			{

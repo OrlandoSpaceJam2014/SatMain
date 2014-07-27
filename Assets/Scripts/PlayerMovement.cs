@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetAxis("DPadVert") > 0.9 && playerSpeed < maxSpeed)
+		if (Input.GetAxis("DPadVert") > 0.9)
 			ForwardThrust ();
 		else if (Input.GetAxis ("DPadVert") < -0.9 && playerSpeed > -maxSpeed)
 			ReverseThrust ();
