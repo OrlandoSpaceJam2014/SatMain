@@ -31,27 +31,34 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetAxis("DPadVert") > 0 || Input.GetKeyDown (KeyCode.W))
+		if (Input.GetAxis("DPadVert") > 0.9)
 			ForwardThrust ();
-		else if (Input.GetAxis ("DPadVert") < 0)
+		else if (Input.GetAxis ("DPadVert") < -0.9)
 			ReverseThrust ();
 
 		if (Input.GetAxis ("DPadHort") > 0)
 			PortThrust ();
 		else if (Input.GetAxis("DPadHort") < 0)		
 		    StarboardThrust ();
+
+		if (Input.GetAxis ("RStickHort") > 0.9)
+			this.transform.Rotate (Vector3.up * rotationSpeed * Time.deltaTime);
+		else if (Input.GetAxis ("RStickHort") < -0.9)
+			this.transform.Rotate (Vector3.down * rotationSpeed * Time.deltaTime);
+
+		if (Input.GetAxis ("RStickVert") > 0.9)
+			this.transform.Rotate (Vector3.right * rotationSpeed * Time.deltaTime);
+		if (Input.GetAxis ("RStickVert") < -0.9)
+			this.transform.Rotate (Vector3.left * rotationSpeed * Time.deltaTime);
 	}
 
 	void ForwardThrust(){
-		if (playerThrust < maxThrust)
-			rigidbody.AddRelativeForce (Vector3.forward * 50);
-		else
-			rigidbody.AddForce (Vector3.forward);
+			rigidbody.AddRelativeForce (Vector3.forward * acceleration);
 	}
 
 	void ReverseThrust(){
 		if (playerThrust < maxThrust)
-			rigidbody.AddRelativeForce (Vector3.back * 50);
+			rigidbody.AddRelativeForce (Vector3.back * acceleration);
 		else
 			rigidbody.AddForce (Vector3.back);
 	}
