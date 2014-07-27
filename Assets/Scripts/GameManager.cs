@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour {
 
 	public bool				  m_bIsDead = false;
 	// Use this for initialization
+	
+	void Awake()
+	{
+		Instance = this;
+	}
 	void Start ()
 	{	
 		Checkpoints = new bool[3];

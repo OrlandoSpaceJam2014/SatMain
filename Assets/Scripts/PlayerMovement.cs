@@ -83,5 +83,13 @@ public class PlayerMovement : MonoBehaviour {
 		rigidbody.AddRelativeForce (Vector3.right * acceleration);
 		playerSideSpeed -= 1.0f * Time.deltaTime;
 	}
+	
+	void OnTriggerEnter(Collider other)
+	{
+		if(other.name == "Skybox")
+		{
+			GameManager.Instance.m_bIsDead = true;
+		}
+	}
 
 }
