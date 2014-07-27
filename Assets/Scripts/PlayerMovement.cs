@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour {
 
 		playerThrust = 5;
 		acceleration = (playerThrust * 50) * Time.deltaTime;
-		rotationSpeed = 50;
+		rotationSpeed = 5;
 		naturalDrift = 1;
 		maxThrust = 50;
 	}
@@ -36,20 +36,30 @@ public class PlayerMovement : MonoBehaviour {
 		else if (Input.GetAxis ("DPadVert") < -0.9)
 			ReverseThrust ();
 
-		if (Input.GetAxis ("DPadHort") > 0)
+		if (Input.GetAxis ("DPadHort") < 0)
 			PortThrust ();
-		else if (Input.GetAxis("DPadHort") < 0)		
+		else if (Input.GetAxis("DPadHort") > 0)		
 		    StarboardThrust ();
 
-		if (Input.GetAxis ("RStickHort") > 0.9)
+		if (Input.GetAxis ("RStickHort") > 0)
 			this.transform.Rotate (Vector3.up * rotationSpeed * Time.deltaTime);
-		else if (Input.GetAxis ("RStickHort") < -0.9)
+		else if (Input.GetAxis ("RStickHort") < 0)
 			this.transform.Rotate (Vector3.down * rotationSpeed * Time.deltaTime);
 
-		if (Input.GetAxis ("RStickVert") > 0.9)
+		if (Input.GetAxis ("RStickVert") > 0 )
 			this.transform.Rotate (Vector3.right * rotationSpeed * Time.deltaTime);
-		if (Input.GetAxis ("RStickVert") < -0.9)
+		else if (Input.GetAxis ("RStickVert") < 0)
 			this.transform.Rotate (Vector3.left * rotationSpeed * Time.deltaTime);
+
+		if(Input.GetAxis("LStickVert") > 0 || Input.GetAxis("LStickHort") > 0)
+		{
+			this.transform.Rotate(Vector3.back * rotationSpeed * 2f * Time.deltaTime);
+		}
+		else if( Input.GetAxis("LStickVert") < 0 || Input.GetAxis("LStickHort") < 0)
+		{
+			this.transform.Rotate(Vector3.forward * rotationSpeed * 2f *  Time.deltaTime);
+		}
+	
 	}
 
 	void ForwardThrust(){
