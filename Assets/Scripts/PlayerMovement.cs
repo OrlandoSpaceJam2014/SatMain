@@ -35,12 +35,12 @@ public class PlayerMovement : MonoBehaviour {
 
 		if (Input.GetAxis("DPadVert") > 0.9)
 			ForwardThrust ();
-		else if (Input.GetAxis ("DPadVert") < -0.9 && playerSpeed > -maxSpeed)
+		else if (Input.GetAxis ("DPadVert") < -0.9)
 			ReverseThrust ();
 
-		if (Input.GetAxis ("DPadHort") < 0 && playerSideSpeed > maxSpeed)
+		if (Input.GetAxis ("DPadHort") < 0)
 			PortThrust ();
-		else if (Input.GetAxis("DPadHort") > 0 && playerSideSpeed < -maxSpeed)		
+		else if (Input.GetAxis("DPadHort") > 0)		
 		    StarboardThrust ();
 
 		if (Input.GetAxis ("RStickHort") > 0)
