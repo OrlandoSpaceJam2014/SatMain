@@ -27,6 +27,19 @@ public class GameManager : MonoBehaviour {
 	void Update () 
 	{
 
+		CheckObjectives();
+
+
+		if(m_bIsDead)
+		{
+			PlayerSettingsScript.Instance.m_bGameOver = true;
+			PlayerSettingsScript.Instance.m_bUwin = false;
+			Application.LoadLevel(2);
+		}
+	}
+	
+	void CheckObjectives()
+	{
 		for (int i = 0; i < 3; i++) 
 		{
 			if(!Checkpoints[i])
@@ -39,14 +52,6 @@ public class GameManager : MonoBehaviour {
 				PlayerSettingsScript.Instance.m_bUwin = true;
 				Application.LoadLevel(2);
 			}
-		}
-
-
-		if(m_bIsDead)
-		{
-			PlayerSettingsScript.Instance.m_bGameOver = true;
-			PlayerSettingsScript.Instance.m_bUwin = false;
-			Application.LoadLevel(2);
 		}
 	}
 }

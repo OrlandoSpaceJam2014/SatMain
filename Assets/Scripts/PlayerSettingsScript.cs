@@ -23,7 +23,7 @@ public class PlayerSettingsScript: MonoBehaviour
 	{
 		m_goMainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 		m_goOculusCamera = GameObject.FindGameObjectWithTag("OculusCamera");
-	
+		print (OVRDevice.IsHMDPresent().ToString());
 		if(OVRDevice.IsHMDPresent())
 		{
 
@@ -45,6 +45,11 @@ public class PlayerSettingsScript: MonoBehaviour
 		{
 			// telll final menu what to do 
 			
+		}
+		
+		if(Input.GetKeyDown(KeyCode.Escape))
+		{
+			Application.LoadLevel(0);
 		}
 	}
 }

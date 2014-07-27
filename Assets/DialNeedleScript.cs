@@ -38,7 +38,7 @@ public class DialNeedleScript : MonoBehaviour {
 		}
 		else
 		{
-			GameManager.Instance.m_bIsDead = true;
+			//GameManager.Instance.m_bIsDead = true;
 		}
 		
 		/*if(!isEmpty && isMoving)
