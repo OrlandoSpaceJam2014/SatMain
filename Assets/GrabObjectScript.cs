@@ -23,6 +23,7 @@ public class GrabObjectScript : MonoBehaviour {
 
 		if(isGrabbed){
 			this.transform.position = playerGrabber.transform.position;
+			this.transform.rotation = playerGrabber.transform.rotation;
 		}
 	}
 }
