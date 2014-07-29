@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿	using UnityEngine;
 using System.Collections;
 
 public class PlayerSettingsScript: MonoBehaviour
@@ -9,9 +9,9 @@ public class PlayerSettingsScript: MonoBehaviour
 	public float 			m_bgnMusic = 1.0f;
 	public bool 			m_bUwin = false;
 	public bool 			m_bGameOver = false;
-	private GameObject		m_goMainCamera;
-	private GameObject		m_goOculusCamera;
-
+	public GameObject		m_goMainCamera;
+	public GameObject		m_goOculusCamera;
+	private bool 			m_bFirstPass = false;
 
 	void Awake()
 	{
@@ -21,26 +21,54 @@ public class PlayerSettingsScript: MonoBehaviour
 
 	void Start ()
 	{
-		m_goMainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-		m_goOculusCamera = GameObject.FindGameObjectWithTag("OculusCamera");
-		print (OVRDevice.IsHMDPresent().ToString());
-		if(OVRDevice.IsHMDPresent())
-		{
+	
 
-			m_goOculusCamera.SetActive(true);
-			m_goMainCamera.SetActive(false);
-
-		}
-		else
-		{
-			m_goMainCamera.SetActive(true);
-			m_goOculusCamera.SetActive(false);
-		}
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		if(m_goMainCamera == null || m_goOculusCamera == null)
+		{
+			m_goMainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+			m_goOculusCamera = GameObject.FindGameObjectWithTag("OculusCamera");
+		}
+		if(!m_bFirstPass)
+		{
+
+			if(!OVRDevice.IsHMDPresent() || !OVRDevice.IsSensorPresent())
+			{
+				m_bOculusOn= false;
+			}
+			else
+			{
+				m_bOculusOn = true;
+			}
+			m_bFirstPass = true;
+		}
+
+		if(Input.GetKeyDown(KeyCode.O))
+		{
+			if(m_bOculusOn)
+			{
+				m_bOculusOn= false;
+			}
+			else 
+			{
+				m_bOculusOn = true;
+			}
+		}
+
+		if(m_bOculusOn)
+		{
+			m_goMainCamera.SetActive(false);
+			m_goOculusCamera.SetActive(true);
+		}
+		else
+		{
+			m_goMainCamera.SetActive(true);
+			m_goOculusCamera.SetActive(false);	
+		}
 		if(m_bGameOver && Application.loadedLevel == 2)
 		{
 			// telll final menu what to do 
