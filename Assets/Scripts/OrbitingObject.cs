@@ -9,7 +9,7 @@ public class OrbitingObject : MonoBehaviour
  	
  	private float 			m_fRotSpeed = 6.0f;
  	private float 			m_fMoveSpeed = 0.01f;
- 	private float 			m_fRadius = 100f;
+ 	private float 			m_fRadius = 1000f;
 	private float 			m_fCurrentDistance = 0f;
 	
 	private bool			m_bSwitchDirection = false;
@@ -49,7 +49,7 @@ public class OrbitingObject : MonoBehaviour
  	void CheckDistance()
  	{
  		m_fCurrentDistance = Vector3.Distance(this.transform.position, m_goTargetObject.transform.position);
- 		if(m_fCurrentDistance > 1000)
+ 		if(m_fCurrentDistance > m_fRadius)
  		{
  			m_bSwitchDirection= true;
  		}
