@@ -4,14 +4,17 @@ using System.Collections;
 public class GrabObjectScript : MonoBehaviour {
 
 	public static GrabObjectScript Instance;
-	
-	public GameObject playerGrabber;
+
 	public bool isGrabbed;
 
-	void Awake(){
-		Instance = this;
+	private GameObject playerGrabber;
+	private GameObject ObjectTowPosition;
 
-		playerGrabber = GameObject.Find ("GrappleDetector");
+	void Awake()
+	{
+		Instance = this;
+		playerGrabber = GameObject.Find ("Position");
+
 	}
 
 	void Start(){
@@ -19,11 +22,14 @@ public class GrabObjectScript : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 
-		if(isGrabbed){
+		if(isGrabbed)
+		{
+	
+			this.transform.parent = playerGrabber.transform;
 			this.transform.position = playerGrabber.transform.position;
-			this.transform.rotation = playerGrabber.transform.rotation;
 		}
 	}
 }

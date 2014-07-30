@@ -6,8 +6,8 @@ public class GameManager : MonoBehaviour {
 	public static GameManager Instance ;
 
 	public bool []			  Checkpoints;
-
 	public bool				  m_bIsDead = false;
+	public int 				  m_nIncrementer;
 	// Use this for initialization
 	
 	void Awake()
@@ -40,18 +40,28 @@ public class GameManager : MonoBehaviour {
 	
 	void CheckObjectives()
 	{
-		for (int i = 0; i < 3; i++) 
+		for ( ;m_nIncrementer < 3;) 
 		{
-			if(!Checkpoints[i])
+			if(!Checkpoints[m_nIncrementer])
 			{
 				return;
 			}
-			else if( i == 3)
+			else 
 			{
-				PlayerSettingsScript.Instance.m_bGameOver = true;
-				PlayerSettingsScript.Instance.m_bUwin = true;
-				Application.LoadLevel(2);
+				m_nIncrementer++;
 			}
 		}
+		if( m_nIncrementer == 3)
+		{
+			PlayerSettingsScript.Instance.m_bGameOver = true;
+			PlayerSettingsScript.Instance.m_bUwin = true;
+			StartCoroutine("PauseForTheEnd", 5);
+		}
+	}
+
+	private IEnumerator PauseForTheEnd(float time)
+	{
+		yield return new WaitForSeconds(time);
+		Application.LoadLevel(2);
 	}
 }

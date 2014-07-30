@@ -20,10 +20,13 @@ public class PanelScript : MonoBehaviour {
 	{
 		if(m_bIsAttached)
 		{
-			for (int i = 0; i < 3; i++) {
-				if(!m_cGameManager.Checkpoints[i])
-					m_cGameManager.Checkpoints[i] = true;
-			}
+			m_cGameManager.Checkpoints[2] = true;
+		}
+
+		if(this.transform.parent.name == "Position")
+		{
+			// here we can turn on the radar or arrow to the connection on the satelite
+
 		}
 	}
 	
