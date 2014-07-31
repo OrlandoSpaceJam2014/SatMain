@@ -112,6 +112,7 @@ public class PlayerMovement : MonoBehaviour {
 		else if (other.gameObject.name == "Satellite") 
 		{
 			print("Hitting the satelite");
+			audio.Play (impact);
 		}
 	}
 	
